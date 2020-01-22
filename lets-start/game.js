@@ -4,24 +4,39 @@ const keys = []
 let frames =0;
 let interval
 const img  = {
-    personaje1: "./assets/personaje1.png"
+    personaje1: "./assets/leolo.png",
+    bg: "./assets/bcgity_low.jpg"
 }
 
- 
+//  class Bg{
+//  constructor(){
+
+
+//     this.image = new Image()
+//     this.image.src = img.bg
+//     this.image.onloadw= ()=>{    
+//         this.draw
+
+//     }
+//  }
+//     draw(){
+//         ctx.drawImage(this.image, 0,0,canvas.width,canvas.height)
+//     }
+   
+//  }
 
 class Personaje{
     constructor(x,y,radio,img){
         this.x = x
         this.y = y
         this.vely= .03
-        this.gravity =1
-        this.weigth = (canvas.height/3)
-        this.radio = 20;
-       /* this.image = new Image()
+        this.gravity =.98
+        this.image = new Image()
+        this.image.src= img.personaje1
         this.image.onload= ()=>{
             this.draw()
         }
-        this.image.src= img.personaje1*/        
+             
     }
 
     
@@ -37,8 +52,8 @@ class Personaje{
 
     draw(){
         this.y+=this.vely
-        if(this.y>canvas.height-this.radio ){
-            this.y= canvas.height-this.radio
+        if(this.y>canvas.height-400 ){
+            this.y= canvas.height-400
             this.vely=0
 
         }
@@ -46,40 +61,42 @@ class Personaje{
 
      
         
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
-        ctx.fill();
-        //ctx.drawImage(this.img, this.x,this.y,clipx,clipy)
+        // ctx.beginPath();
+        // ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
+        // ctx.fillStyle= "yellow";
+        // ctx.fill();
+
+        ctx.drawImage(this.image, this.x,this.y,150,400)
     }
 
    
 
     rigth(){
-        this.x +=10;
+        this.x +=30;
 
     }
     left(){
-        this.x -=10;
+        this.x -30;
     }
     
 
 
     saltaAdelante(){
-        this.y-=100
-        this.x+=200
-        this.draw()
-        this.vely=0.03
+        // this.y-=100
+        // this.x+=200
+        // this.draw()
+        // this.vely=0.03
 
     }
     saltaAtras(){
 let distancia= this.x-200
 
-        while(this.x>distancia){
-            this.y-=2
-            this.x-=10
-            this.draw()
-            this.vely=0.03
-        }
+        // while(this.x>distancia){
+        //     this.y-=2
+        //     this.x-=10
+        //     this.draw()
+        //     this.vely=0.03
+        // }
 
 
     }
@@ -89,14 +106,17 @@ let distancia= this.x-200
 
 
 
-
-    const bolita =new Personaje(300,0,80,img.personaje1)
+    // const background = new Bg()
+    const bolita =new Personaje(0,canvas.height-400,80,img)
+   
     function update(){
         // intervalo = requestAnimationFrame(update)
-        setInterval(update,1000/60)
+        setInterval(update,1000/120)
         ctx.clearRect(0,0,canvas.width,canvas.height)
-        bolita.draw()
+        // background.draw()
 
+        bolita.draw()
+       
     }
 
         function start(){
@@ -130,3 +150,5 @@ document.addEventListener('keyup', ({keyCode})=>{
    
     
 })
+
+
