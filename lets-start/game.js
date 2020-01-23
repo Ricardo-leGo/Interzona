@@ -6,7 +6,7 @@ let interval
 let varShoot= false
 const img  = {
     personaje1: "./assets/leolo.png",
-    bg: "./assets/bcgity.jpg",
+    bg: "./assets/bcgity.png",
     char:"assets/char.png"
 }
 
