@@ -126,6 +126,9 @@ let distancia= this.x-200
     }
 
 
+
+
+
 }
 
 
