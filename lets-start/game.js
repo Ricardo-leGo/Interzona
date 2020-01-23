@@ -3,31 +3,39 @@ const ctx = canvas.getContext('2d')
 const keys = []
 let frames =0;
 let interval
+let current =0
+ let variabledePrueba =false
 const img  = {
-    personaje1: "./assets/personaje1.png"
+    personaje1: "./assets/scar.png",
+    bg: "./assets/bgcy.jpg",
+    char:"./assets/char.png"
 }
 
- 
 
 class Personaje{
-    constructor(x,y,radio,img){
+    constructor(x,y,img){
+        this.dx=0
+        this.dy=0
         this.x = x
         this.y = y
+        this.width = 85
+        this.height = 240
+        this.sx =0
+        this.sy=0
         this.vely= .03
-        this.gravity =1
-        this.weigth = (canvas.height/3)
-        this.radio = 20;
-       /* this.image = new Image()
+        this.gravity =.98
+        this.image = new Image()
+        this.image.src= img.char
         this.image.onload= ()=>{
             this.draw()
         }
-        this.image.src= img.personaje1*/        
+             
     }
 
     
    
     salta(){
-        this.y-=100
+        this.y-=400
         this.draw()
         this.vely=0.03
 
@@ -36,32 +44,56 @@ class Personaje{
 
 
     draw(){
-        this.y+=this.vely
-        if(this.y>canvas.height-this.radio ){
-            this.y= canvas.height-this.radio
-            this.vely=0
+         if(this.sx>=595){
+            this.sx = 0}
+        ctx.drawImage(
+            this.image,
+            this.sx,
+            this.sy,
+            85,
+            240,
+            this.x,
+            this.y,
+            this.width,
+            this.height 
+            )
 
+        this.y+=this.vely
+        if(this.y>canvas.height-240 ){
+                this.y= canvas.height-240
+            this.vely=0
         }
 
 
-     
-        
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
-        ctx.fill();
-        //ctx.drawImage(this.img, this.x,this.y,clipx,clipy)
     }
 
-   
+   shoot(){
+
+        this.dy-=1
+    if (this.x> canvas.width/2){
+        this.dx= (-1)*dx
+        
+    }    
+        ctx.beginPath();
+        ctx.arc(this.x+85 +this.dx, this.y+50+this.dy, Math.random()*80, 0, 2 * Math.PI);
+        ctx.fill()
+        ctx.stroke();
+        console.log("hola "+this.dx);
+    }
 
     rigth(){
         this.x +=10;
+        this.move()
 
     }
     left(){
-        this.x -=10;
+        this.x  -=10;
+        this.move()
     }
-    
+
+    move(){
+        this.sx+=85
+    }
 
 
     saltaAdelante(){
@@ -88,23 +120,26 @@ let distancia= this.x-200
 }
 
 
-
-
-    const bolita =new Personaje(300,0,80,img.personaje1)
+const bolita =new Personaje(0,canvas.height-240,img)
+   
     function update(){
-        // intervalo = requestAnimationFrame(update)
-        setInterval(update,1000/60)
+        setInterval(update,1000/5)
         ctx.clearRect(0,0,canvas.width,canvas.height)
+       
         bolita.draw()
+         if(variabledePrueba){
+            bolita.shoot()
+         }
+        
 
     }
 
         function start(){
             update()
         }
-        start()
+        start() 
+    
 
-// canvas.addEventListener('click', start)
 
 
 document.addEventListener('keydown', ({keyCode})=>{
@@ -115,10 +150,12 @@ keys[keyCode]=true
         bolita.saltaAdelante()
     }else if(keys[32]&&keys[37]){
         bolita.saltaAtras()
+    }else if (keyCode==82) {
+       variabledePrueba = true
+    }else if(keyCode==37){
+        bolita.left()
     }else if(keyCode==39){
         bolita.rigth()
-    }else if(keyCode===37){
-        bolita.left()
     }else if(keyCode==32){
         bolita.salta()
     }
@@ -126,7 +163,8 @@ keys[keyCode]=true
 
 
 document.addEventListener('keyup', ({keyCode})=>{
-  keys[keyCode]=false
-   
-    
+  keys[keyCode]=false  
+  variabledePrueba=false
 })
+
+
