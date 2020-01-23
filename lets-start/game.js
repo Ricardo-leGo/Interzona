@@ -35,7 +35,7 @@ class Personaje{
         this.dy=0
         this.vy = .001
         this.vx = .001
-        this.sx = 0;
+        this.sx = 0
         this.sy = 0
         this.vely= .03
         this.gravity =.98
@@ -49,10 +49,10 @@ class Personaje{
 
     shooter(){
     
-            this.dy-=.01
-            this.dx += .01
-            if(this.x>canvas.width-40||this.x<40)this.dx=this.dx*-1
-            if (this.y>canvas.height-40||this.x<40)this.dy=this.dy*-1
+            this.dy-=.003
+            this.dx += .1
+            if(this.x>canvas.width/2)this.dy=this.dy*-1
+            
         ctx.beginPath();
         ctx.arc(
             this.x+85 +this.dx, 
