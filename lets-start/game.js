@@ -10,22 +10,22 @@ const img  = {
     char:"assets/char.png"
 }
 
-//  class Bg{
-//  constructor(){
+ class Bg{
+ constructor(){
 
 
-//     this.image = new Image()
-//     this.image.src = img.bg
-//     this.image.onloadw= ()=>{    
-//         this.draw
+    this.image = new Image()
+    this.image.src = img.bg
+    this.image.onloadw= ()=>{    
+        this.draw
 
-//     }
-//  }
-//     draw(){
-//         ctx.drawImage(this.image, 0,0,canvas.width,canvas.height)
-//     }
+    }
+ }
+    draw(){
+        ctx.drawImage(this.image, 0,0,canvas.width,canvas.height)
+    }
    
-//  }
+ }
 
 class Personaje{
     constructor(x,y,radio,img){
@@ -138,7 +138,7 @@ let distancia= this.x-200
 
 
 
-    // const background = new Bg()
+    const background = new Bg()
     const bolita =new Personaje(0,canvas.height-250,80,img)
    
     function update(){
