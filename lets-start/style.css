@@ -4,10 +4,5 @@ canvas{
     border: 2px solid black;
     display:block;
     margin:5% auto;
-    background-image: url('./assets/bgcy.jpg');
-<<<<<<< HEAD
-    -webkit-background-size:cover;
-    background-size:cover;
-=======
->>>>>>> f07563f82192ec981d3fee8a3ef5476668feb68f
+
 }

@@ -3,18 +3,11 @@ const ctx = canvas.getContext('2d')
 const keys = []
 let frames =0;
 let interval
-let current =0
- let variabledePrueba =false
+let varShoot= false
 const img  = {
-<<<<<<< HEAD
-    personaje1: "./assets/scar.png",
-    bg: "./assets/bgcy.jpg",
-    char:"./assets/char.png"
-}
-
-=======
     personaje1: "./assets/leolo.png",
-    bg: "./assets/bcgity_low.jpg"
+    bg: "./assets/bgcy.png",
+    char:"assets/char.png"
 }
 
 //  class Bg{
@@ -33,36 +26,47 @@ const img  = {
 //     }
    
 //  }
->>>>>>> f07563f82192ec981d3fee8a3ef5476668feb68f
 
 class Personaje{
-    constructor(x,y,img){
-        this.dx=0
-        this.dy=0
+    constructor(x,y,radio,img){
         this.x = x
         this.y = y
-        this.width = 85
-        this.height = 240
-        this.sx =0
-        this.sy=0
+        this.dx= 0
+        this.dy=0
+        this.vy = .001
+        this.vx = .001
+        this.sx = 0;
+        this.sy = 0
         this.vely= .03
         this.gravity =.98
         this.image = new Image()
-<<<<<<< HEAD
         this.image.src= img.char
-=======
-        this.image.src= img.personaje1
->>>>>>> f07563f82192ec981d3fee8a3ef5476668feb68f
         this.image.onload= ()=>{
             this.draw()
         }
              
     }
 
+    shooter(){
     
+           this.x=  85 +this.dy-=.01
+           this.y = 50+this.dy
+            this.y= this.dx += .01
+            if(this.x>canvas.width-40||this.x<40)this.dx=this.dx*-1
+            if(this.y>canvas.height-40||this.x<40)this.dy=this.dy*-1
+        ctx.beginPath();
+        ctx.arc(
+            this.x+85 +this.dx, 
+            this.y+50+this.dy,
+             80,
+              0, 
+              2 * Math.PI);
+        ctx.fill()
+
+    }
    
     salta(){
-        this.y-=400
+        this.y-=100
         this.draw()
         this.vely=0.03
 
@@ -71,96 +75,61 @@ class Personaje{
 
 
     draw(){
-         if(this.sx>=595){
-            this.sx = 0}
-        ctx.drawImage(
-            this.image,
-            this.sx,
-            this.sy,
-            85,
-            240,
-            this.x,
-            this.y,
-            this.width,
-            this.height 
-            )
 
+
+        if(this.sx>545)this.sx=0
+        if(this.sx<0)this.sx =460
         this.y+=this.vely
-<<<<<<< HEAD
-        if(this.y>canvas.height-240 ){
-                this.y= canvas.height-240
-=======
-        if(this.y>canvas.height-400 ){
-            this.y= canvas.height-400
->>>>>>> f07563f82192ec981d3fee8a3ef5476668feb68f
+        if(this.y>canvas.height-250 ){
+            this.y= canvas.height-250
             this.vely=0
+
         }
 
 
-    }
-
-   shoot(){
-
-        this.dy-=1
-    if (this.x> canvas.width/2){
-        this.dx= (-1)*dx
+     
         
-<<<<<<< HEAD
-    }    
-        ctx.beginPath();
-        ctx.arc(this.x+85 +this.dx, this.y+50+this.dy, Math.random()*80, 0, 2 * Math.PI);
-        ctx.fill()
-        ctx.stroke();
-        console.log("hola "+this.dx);
-=======
         // ctx.beginPath();
         // ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
         // ctx.fillStyle= "yellow";
         // ctx.fill();
 
-        ctx.drawImage(this.image, this.x,this.y,150,400)
->>>>>>> f07563f82192ec981d3fee8a3ef5476668feb68f
+        ctx.drawImage(this.image, this.sx,this.sy,85,240,this.x,this.y, 85,250)
     }
+
+   
 
     rigth(){
-<<<<<<< HEAD
-        this.x +=10;
-        this.move()
-
-    }
-    left(){
-        this.x  -=10;
-        this.move()
-    }
-
-    move(){
-        this.sx+=85
-=======
         this.x +=30;
+        this.move();
 
     }
     left(){
-        this.x -30;
->>>>>>> f07563f82192ec981d3fee8a3ef5476668feb68f
+        this.x -=30     ;
+        this.move();
     }
+    move(){
 
+        this.sx      += 85;
+    }
+    
 
     saltaAdelante(){
-        // this.y-=100
-        // this.x+=200
-        // this.draw()
-        // this.vely=0.03
+        this.y-=100
+        this.x+=200
+        this.draw()
+        this.vely=0.03
 
     }
     saltaAtras(){
 let distancia= this.x-200
 
-        // while(this.x>distancia){
-        //     this.y-=2
-        //     this.x-=10
-        //     this.draw()
-        //     this.vely=0.03
-        // }
+        while(this.x>distancia){
+            this.y-=2
+            this.x-=10
+            this.draw()
+            this.vely=0.03
+        }
 
 
     }
@@ -169,39 +138,25 @@ let distancia= this.x-200
 }
 
 
-<<<<<<< HEAD
-const bolita =new Personaje(0,canvas.height-240,img)
-   
-    function update(){
-        setInterval(update,1000/5)
-        ctx.clearRect(0,0,canvas.width,canvas.height)
-       
-        bolita.draw()
-         if(variabledePrueba){
-            bolita.shoot()
-         }
-        
-=======
 
     // const background = new Bg()
-    const bolita =new Personaje(0,canvas.height-400,80,img)
+    const bolita =new Personaje(0,canvas.height-250,80,img)
    
     function update(){
-        // intervalo = requestAnimationFrame(update)
-        setInterval(update,1000/120)
+        
+        let iintervalo  = setInterval(update,1)
         ctx.clearRect(0,0,canvas.width,canvas.height)
         // background.draw()
->>>>>>> f07563f82192ec981d3fee8a3ef5476668feb68f
 
         bolita.draw()
+        bolita.shooter()
        
     }
 
         function start(){
             update()
         }
-        start() 
-    
+        start()
 
 
 
@@ -213,12 +168,13 @@ keys[keyCode]=true
         bolita.saltaAdelante()
     }else if(keys[32]&&keys[37]){
         bolita.saltaAtras()
-    }else if (keyCode==82) {
-       variabledePrueba = true
-    }else if(keyCode==37){
-        bolita.left()
-    }else if(keyCode==39){
+    }else if (keyCode ==82){
+        varShoot=true
+    }
+    else if(keyCode==39){
         bolita.rigth()
+    }else if(keyCode===37){
+        bolita.left()
     }else if(keyCode==32){
         bolita.salta()
     }
@@ -226,14 +182,10 @@ keys[keyCode]=true
 
 
 document.addEventListener('keyup', ({keyCode})=>{
-<<<<<<< HEAD
-  keys[keyCode]=false  
-  variabledePrueba=false
-=======
   keys[keyCode]=false
+  varShoot=false
    
     
->>>>>>> f07563f82192ec981d3fee8a3ef5476668feb68f
 })
 
 
