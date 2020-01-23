@@ -17,7 +17,7 @@ const img  = {
     this.image = new Image()
     this.image.src = img.bg
     this.image.onloadw= ()=>{    
-        this.draw
+        this.draw()
 
     }
  }
