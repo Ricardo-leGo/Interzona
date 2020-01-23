@@ -49,11 +49,10 @@ class Personaje{
 
     shooter(){
     
-           this.x=  85 +this.dy-=.01
-           this.y = 50+this.dy
-            this.y= this.dx += .01
+            this.dy-=.01
+            this.dx += .01
             if(this.x>canvas.width-40||this.x<40)this.dx=this.dx*-1
-            if(this.y>canvas.height-40||this.x<40)this.dy=this.dy*-1
+            if (this.y>canvas.height-40||this.x<40)this.dy=this.dy*-1
         ctx.beginPath();
         ctx.arc(
             this.x+85 +this.dx, 
