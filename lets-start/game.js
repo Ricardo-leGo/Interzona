@@ -6,7 +6,7 @@ let interval
 let varShoot= false
 const img  = {
     personaje1: "./assets/leolo.png",
-    bg: "./assets/bgcy.png",
+    bg: "./assets/bcgity.png",
     char:"assets/char.png"
 }
 
@@ -49,7 +49,7 @@ class Personaje{
 
     shooter(){
     
-            this.dy-=.003
+            this.dy-=.03
             this.dx += .1
             if(this.x>canvas.width/2)this.dy=this.dy*-1
             
@@ -84,14 +84,6 @@ class Personaje{
             this.vely=0
 
         }
-
-
-     
-        
-        // ctx.beginPath();
-        // ctx.arc(this.x, this.y, this.radio, 0, 2 * Math.PI);
-        // ctx.fillStyle= "yellow";
-        // ctx.fill();
 
         ctx.drawImage(this.image, this.sx,this.sy,85,240,this.x,this.y, 85,250)
     }
@@ -145,7 +137,7 @@ let distancia= this.x-200
         
         let iintervalo  = setInterval(update,1)
         ctx.clearRect(0,0,canvas.width,canvas.height)
-        // background.draw()
+        background.draw()
 
         bolita.draw()
         bolita.shooter()
